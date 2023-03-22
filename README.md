@@ -1,4 +1,4 @@
-# fish-gpt
+# Fish GPT
 
 ## Project setup
 ```
