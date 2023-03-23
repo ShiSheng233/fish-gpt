@@ -75,8 +75,7 @@ export default {
 .chat-history {
   width: 100%;
   max-width: 600px;
-  min-height: 200px;
-  max-height: 400px;
+  flex: 1;
   overflow-y: auto;
   padding: 10px;
 }
@@ -85,6 +84,8 @@ export default {
   display: flex;
   align-items: flex-start;
   margin-bottom: 10px;
+  border-radius: 10px;
+  position: relative;
 }
 
 .message-content {
