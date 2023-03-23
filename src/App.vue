@@ -76,6 +76,7 @@ export default {
   width: 100%;
   max-width: 600px;
   flex: 1;
+  height: 100vh;
   overflow-y: auto;
   padding: 10px;
 }
