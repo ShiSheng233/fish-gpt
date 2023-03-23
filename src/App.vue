@@ -7,13 +7,17 @@
           <div class="avatar" v-if="!message.isMe">
             <img src="https://avatars.githubusercontent.com/u/32504382" alt="avatar" />
           </div>
-          <div class="text">{{ message.text }}</div>
-          <div class="tag" v-if="message.isMe">我</div>
+          <div class="message-content">
+            <div class="text">{{ message.text }}</div>
+            <div class="timestamp">{{ message.timestamp }}</div>
+            <div class="tag" v-if="message.isMe">我</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="chat-input">
-      <el-input v-model="inputText" placeholder="请输入消息" @keyup.enter="sendMessage" />
+      <el-input v-model="inputText" placeholder="请输入消息..." @keyup.enter="sendMessage" />
+      <el-button class="send-button" type="primary" @click="sendMessage">发送</el-button>
     </div>
   </div>
 </template>
@@ -35,8 +39,9 @@ export default {
       }
       const text = inputText.value;
       const reply = Math.random() < 0.8 ? '你完蛋了。' : '草我';
-      messages.value.push({ text, isMe: true });
-      messages.value.push({ text: reply, isMe: false });
+      const timestamp = new Date().toLocaleTimeString();
+      messages.value.push({ text, isMe: true, timestamp });
+      messages.value.push({ text: reply, isMe: false, timestamp });
       inputText.value = '';
     }
 
@@ -56,43 +61,69 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 0 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .chat-history {
   width: 100%;
   max-width: 600px;
   flex: 1;
+  height: 100vh;
   overflow-y: auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .message {
   display: flex;
-  align-items: center;
-  padding: 10px 20px;
+  align-items: flex-start;
   margin-bottom: 10px;
   border-radius: 10px;
   position: relative;
 }
 
-.is-me {
-  flex-direction: row-reverse;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  color: #fff;
+.message-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  max-width: 80%;
+}
+
+.is-me .message-content {
+  align-items: flex-end;
+}
+
+.text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #0072ff;
+  padding: 2px 5px;
+  border-radius: 5px;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -103,38 +134,29 @@ export default {
   object-fit: cover;
 }
 
-.text {
-  flex: 1;
-}
-
-.tag {
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  font-size: 12px;
-  font-weight: bold;
-  color: #333;
-}
-
 .chat-input {
   width: 100%;
   max-width: 600px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .el-input {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 10px;
+  font-size: 14px;
 }
 
+.send-button {
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #0072ff;
+  color: white;
+  font-size: 14px;
+}
 </style>
