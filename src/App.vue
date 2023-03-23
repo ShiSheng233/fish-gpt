@@ -138,7 +138,7 @@ export default {
   width: 100%;
   max-width: 600px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px;
   background-color: #fff;
