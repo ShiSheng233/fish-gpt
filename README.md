@@ -1,8 +1,8 @@
-# essentials
+# Fish GPT
 
 ## Project setup
 
-```
+```bash
 # yarn
 yarn
 
@@ -15,7 +15,7 @@ pnpm install
 
 ### Compiles and hot-reloads for development
 
-```
+```bash
 # yarn
 yarn dev
 
@@ -28,7 +28,7 @@ pnpm dev
 
 ### Compiles and minifies for production
 
-```
+```bash
 # yarn
 yarn build
 
@@ -41,7 +41,7 @@ pnpm build
 
 ### Lints and fixes files
 
-```
+```bash
 # yarn
 yarn lint
 

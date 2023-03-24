@@ -5,7 +5,7 @@
     </template>
     <v-app-bar-title>
       Bard
-      <v-chip class="ma-2" color="primary" variant="outlined">
+      <v-chip class="rounded-lg" color="primary" variant="outlined">
         Experiment
       </v-chip>
     </v-app-bar-title>
@@ -16,7 +16,6 @@
           <v-icon icon="mdi-account-circle"></v-icon>
         </v-avatar>
       </v-btn>
-
     </template>
   </v-app-bar>
 </template>
