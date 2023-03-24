@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </template>
     <v-app-bar-title>
-      Bard
+      Fish GPT
       <v-chip class="rounded-lg" color="primary" variant="outlined">
         Experiment
       </v-chip>
