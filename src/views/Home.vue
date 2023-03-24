@@ -1,11 +1,38 @@
 <template>
   <!-- <HelloWorld /> -->
   <v-container class="h-full bg-slate-50">
-    <div class="w-1 h-full"></div>
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white">
-      <v-form>
+    <div class="w-full h-full pb-28">
+      <div v-for="(item, index) in messageList" :key="index">
+        <div class="flex items-center my-4">
+          <div>
+            <v-avatar>
+              <v-icon icon="mdi-account-circle"></v-icon>
+            </v-avatar>
+          </div>
+          <div class="break-all whitespace-normal">
+            {{ item.send }}
+          </div>
+        </div>
         <div>
-          <v-text-field variant="outlined" placeholder="Enter a prompt here" append-icon="mdi-send"></v-text-field>
+          <v-banner icon="mdi-lightbulb" :text="item.reply">
+            <v-banner-actions>
+              <v-btn icon="mdi-dots-vertical"></v-btn>
+            </v-banner-actions>
+          </v-banner>
+        </div>
+      </div>
+    </div>
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white">
+      <v-form ref="formRef">
+        <div>
+          <v-text-field
+            variant="outlined"
+            placeholder="Enter a prompt here"
+            append-icon="mdi-send"
+            v-model="model"
+            :rules="[(v) => !!v || 'prompt is required']"
+            @click:append="handleSend"
+          ></v-text-field>
         </div>
       </v-form>
     </div>
@@ -13,9 +40,31 @@
 </template>
 
 <script lang="ts" setup>
-  // import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
+import { ref } from "vue";
+
+interface Message {
+  send: string;
+  reply: string;
+}
+
+const model = ref("");
+const formRef = ref();
+const messageList = ref<Message[]>([]);
+
+async function handleSend() {
+  try {
+    const { valid } = await formRef.value.validate();
+    if (!valid) return;
+    messageList.value.push({
+      send: model.value,
+      reply: Math.random() < 0.8 ? "你完蛋了。" : "屮我",
+    });
+    model.value = "";
+  } catch (error) {
+    console.error(error);
+  }
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
