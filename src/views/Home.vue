@@ -1,5 +1,4 @@
 <template>
-  <!-- <HelloWorld /> -->
   <v-container class="h-full bg-slate-50">
     <div class="w-full h-full pb-28">
       <div v-for="(item, index) in messageList" :key="index">
@@ -14,7 +13,10 @@
           </div>
         </div>
         <div>
-          <v-banner icon="mdi-lightbulb" :text="item.reply">
+          <v-banner :text="item.reply">
+            <template #icon>
+              <img class="avatar-image" src="https://avatars.githubusercontent.com/u/32504382" alt="avatar" />
+            </template>
             <v-banner-actions>
               <v-btn icon="mdi-dots-vertical"></v-btn>
             </v-banner-actions>
@@ -40,7 +42,6 @@
 </template>
 
 <script lang="ts" setup>
-// import HelloWorld from '@/components/HelloWorld.vue'
 import { ref } from "vue";
 
 interface Message {
@@ -58,7 +59,7 @@ async function handleSend() {
     if (!valid) return;
     messageList.value.push({
       send: model.value,
-      reply: Math.random() < 0.8 ? "你完蛋了。" : "屮我",
+      reply: Math.random() < 0.8 ? "你完蛋了。" : "草我",
     });
     model.value = "";
   } catch (error) {
@@ -67,4 +68,8 @@ async function handleSend() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar-image {
+  border-radius: 50%;
+}
+</style>
