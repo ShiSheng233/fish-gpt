@@ -4,14 +4,19 @@
       <div v-for="(item, index) in messageList" :key="index">
         <div class="flex items-center my-4">
           <div>
-            <img class="avatar-image" src="https://avatars.githubusercontent.com/u/32504382" alt="avatar" />
+            <v-avatar>
+              <v-icon icon="mdi-account-circle"></v-icon>
+            </v-avatar>
           </div>
-          <div class="break-all whitespace-normal ml-2">
+          <div class="break-all whitespace-normal">
             {{ item.send }}
           </div>
         </div>
         <div>
           <v-banner :text="item.reply">
+            <template #icon>
+              <img class="reply-avatar-image" src="https://avatars.githubusercontent.com/u/32504382" alt="avatar" />
+            </template>
             <v-banner-actions>
               <v-btn icon="mdi-dots-vertical"></v-btn>
             </v-banner-actions>
@@ -64,9 +69,9 @@ async function handleSend() {
 </script>
 
 <style lang="scss" scoped>
-.avatar-image {
+.reply-avatar-image {
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
 }
 </style>
